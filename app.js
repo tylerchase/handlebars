@@ -1,13 +1,26 @@
 const Express = require('express')
+var hbs = require('hbs')
 
 let app = Express();
 
+app.set('view engine', 'hbs');
+hbs.localsAsTemplateData(app);
+
+app.locals.cohortName ='g31'
+
 app.get('/', (req, res) => {
-  res.json({message: 'Hello from express, maybe'});
+  res.render('home', {
+    cohortName: 'g31',
+    foods:[
+      'chalupa',
+      'ceviche',
+      'sprinkles'
+    ]
+  });
 })
 
 app.get('/page2', (req, res) => {
-  res.json({message: 'I am page 2 now!!!'})
+  res.render('page2')
 })
 
 app.listen(3000, () => {
